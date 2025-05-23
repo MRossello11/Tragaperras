@@ -1,9 +1,7 @@
 package com.example.tragaperras.random_number.presentation
 
-import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.tragaperras.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,10 +12,10 @@ import kotlinx.coroutines.launch
 import kotlin.random.Random
 import kotlin.random.nextInt
 
-sealed class RandomNumberTextEvent {
-    data object RandomNumberHigher: RandomNumberTextEvent()
-    data object RandomNumberLower: RandomNumberTextEvent()
-    data object RandomNumberGuessed: RandomNumberTextEvent()
+sealed class GuessoutcomeEvent {
+    data object RandomNumberHigher: GuessoutcomeEvent()
+    data object RandomNumberLower: GuessoutcomeEvent()
+    data object RandomNumberGuessed: GuessoutcomeEvent()
 }
 
 class RandomNumberViewModel: ViewModel() {
@@ -40,24 +38,24 @@ class RandomNumberViewModel: ViewModel() {
     fun changeSelectedNumber(newValue: Float) {
         _uiState.update { currentState ->
             currentState.copy(
-                selectedNumber = newValue.toInt()
+                guess = newValue.toInt()
             )
         }
     }
 
-    fun sendNumber() {
+    fun submitGuess() {
         // todo: create use case?
-        if (_uiState.value.randomNumber!! > _uiState.value.selectedNumber) { // todo remove '!!'
+        if (_uiState.value.randomNumber!! > _uiState.value.guess) { // todo remove '!!'
             _uiState.update { currentState ->
                 currentState.copy(
-                    randomNumberTextEvent = RandomNumberTextEvent.RandomNumberHigher,
+                    guessOutcomeEvent = GuessoutcomeEvent.RandomNumberHigher,
                 )
             }
             resetTextDelayed()
-        } else if (_uiState.value.randomNumber!! < _uiState.value.selectedNumber) { // todo remove '!!'
+        } else if (_uiState.value.randomNumber!! < _uiState.value.guess) { // todo remove '!!'
             _uiState.update { currentState ->
                 currentState.copy(
-                    randomNumberTextEvent = RandomNumberTextEvent.RandomNumberLower,
+                    guessOutcomeEvent = GuessoutcomeEvent.RandomNumberLower,
                 )
             }
             resetTextDelayed()
@@ -65,7 +63,7 @@ class RandomNumberViewModel: ViewModel() {
             _uiState.update { currentState ->
                 currentState.copy(
                     showNumber = true,
-                    randomNumberTextEvent = RandomNumberTextEvent.RandomNumberGuessed,
+                    guessOutcomeEvent = GuessoutcomeEvent.RandomNumberGuessed,
                 )
             }
         }
@@ -76,7 +74,7 @@ class RandomNumberViewModel: ViewModel() {
             delay(2000)
             _uiState.update { currentState ->
                 currentState.copy(
-                    randomNumberTextEvent = null
+                    guessOutcomeEvent = null
                 )
             }
         }
@@ -86,7 +84,7 @@ class RandomNumberViewModel: ViewModel() {
         _uiState.update { currentState ->
             currentState.copy(
                 showNumber = false,
-                randomNumberTextEvent = null
+                guessOutcomeEvent = null
             )
         }
 
