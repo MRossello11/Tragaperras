@@ -10,14 +10,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,9 +24,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.tragaperras.R
-import com.example.tragaperras.random_number.presentation.RandomNumberTextEvent.RandomNumberGuessed
-import com.example.tragaperras.random_number.presentation.RandomNumberTextEvent.RandomNumberHigher
-import com.example.tragaperras.random_number.presentation.RandomNumberTextEvent.RandomNumberLower
+import com.example.tragaperras.random_number.presentation.GuessOutcomeEvent.RandomNumberGuessed
+import com.example.tragaperras.random_number.presentation.GuessOutcomeEvent.RandomNumberHigher
+import com.example.tragaperras.random_number.presentation.GuessOutcomeEvent.RandomNumberLower
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -76,12 +73,12 @@ fun RandomNumberScreen(
 
             // user interaction part
             Slider(
-                value = uiState.selectedNumber.toFloat(),
+                value = uiState.guess.toFloat(),
                 onValueChange = randomNumberViewModel::changeSelectedNumber,
                 valueRange = 0f..100f,
                 steps = 100
             )
-            Text(text = uiState.selectedNumber.toString())
+            Text(text = uiState.guess.toString())
 
             Box(
                 modifier = Modifier
@@ -89,22 +86,16 @@ fun RandomNumberScreen(
                     .height(40.dp),
                 contentAlignment = Alignment.Center
             ) {
-                when (uiState.randomNumberTextEvent) {
-                    RandomNumberHigher -> {
-                        Text(text = stringResource(R.string.random_number_higher))
-                    }
-                    RandomNumberLower -> {
-                        Text(text = stringResource(R.string.random_number_lower))
-                    }
-                    RandomNumberGuessed -> {
-                        Text(text = stringResource(R.string.random_number_guessed))
-                    } 
-                    else -> {} // don't render anything
-                }
+                Text(text = when (uiState.guessOutcomeEvent) {
+                    RandomNumberHigher  -> stringResource(R.string.random_number_higher)
+                    RandomNumberLower   -> stringResource(R.string.random_number_lower)
+                    RandomNumberGuessed -> stringResource(R.string.random_number_guessed)
+                    else -> "" // don't show anything
+                })
             }
 
             Button(
-                onClick = randomNumberViewModel::sendNumber,
+                onClick = randomNumberViewModel::submitGuess,
                 content = {
                     Text(text = stringResource(R.string.send))
                 }
