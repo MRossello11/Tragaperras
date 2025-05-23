@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import kotlin.random.Random
 import kotlin.random.nextInt
 
@@ -27,7 +26,7 @@ class RandomNumberViewModel: ViewModel() {
         newRandomNumber()
     }
 
-    fun newRandomNumber() {
+    private fun newRandomNumber() {
         _uiState.update { currentState ->
             currentState.copy(
                 randomNumber = Random.nextInt(0..100)
@@ -38,7 +37,8 @@ class RandomNumberViewModel: ViewModel() {
     fun changeSelectedNumber(newValue: Float) {
         _uiState.update { currentState ->
             currentState.copy(
-                guess = newValue.toInt()
+                guess = newValue.toInt(),
+                guessOutcomeEvent = null // remove current text being shown
             )
         }
     }

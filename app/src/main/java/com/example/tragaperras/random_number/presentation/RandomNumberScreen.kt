@@ -86,18 +86,12 @@ fun RandomNumberScreen(
                     .height(40.dp),
                 contentAlignment = Alignment.Center
             ) {
-                when (uiState.guessOutcomeEvent) {
-                    RandomNumberHigher -> {
-                        Text(text = stringResource(R.string.random_number_higher))
-                    }
-                    RandomNumberLower -> {
-                        Text(text = stringResource(R.string.random_number_lower))
-                    }
-                    RandomNumberGuessed -> {
-                        Text(text = stringResource(R.string.random_number_guessed))
-                    } 
-                    else -> {} // don't render anything
-                }
+                Text(text = when (uiState.guessOutcomeEvent) {
+                    RandomNumberHigher  -> stringResource(R.string.random_number_higher)
+                    RandomNumberLower   -> stringResource(R.string.random_number_lower)
+                    RandomNumberGuessed -> stringResource(R.string.random_number_guessed)
+                    else -> "" // don't show anything
+                })
             }
 
             Button(
