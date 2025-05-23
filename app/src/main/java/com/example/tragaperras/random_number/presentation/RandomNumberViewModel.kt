@@ -1,9 +1,9 @@
 package com.example.tragaperras.random_number.presentation
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
+import com.example.tragaperras.random_number.presentation.GuessOutcomeEvent.RandomNumberGuessed
+import com.example.tragaperras.random_number.presentation.GuessOutcomeEvent.RandomNumberHigher
+import com.example.tragaperras.random_number.presentation.GuessOutcomeEvent.RandomNumberLower
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -44,39 +44,18 @@ class RandomNumberViewModel: ViewModel() {
     }
 
     fun submitGuess() {
-        // todo: create use case?
-        if (_uiState.value.randomNumber!! > _uiState.value.guess) { // todo remove '!!'
-            _uiState.update { currentState ->
-                currentState.copy(
-                    guessOutcomeEvent = GuessOutcomeEvent.RandomNumberHigher,
-                )
-            }
-            resetTextDelayed()
-        } else if (_uiState.value.randomNumber!! < _uiState.value.guess) { // todo remove '!!'
-            _uiState.update { currentState ->
-                currentState.copy(
-                    guessOutcomeEvent = GuessOutcomeEvent.RandomNumberLower,
-                )
-            }
-            resetTextDelayed()
-        } else {
-            _uiState.update { currentState ->
-                currentState.copy(
-                    showNumber = true,
-                    guessOutcomeEvent = GuessOutcomeEvent.RandomNumberGuessed,
-                )
-            }
-        }
-    }
+        val target = _uiState.value.randomNumber ?: return
+        val guess = _uiState.value.guess
 
-    private fun resetTextDelayed() {
-        viewModelScope.launch(Dispatchers.IO) {
-            delay(2000)
-            _uiState.update { currentState ->
-                currentState.copy(
-                    guessOutcomeEvent = null
-                )
-            }
+        _uiState.update { current ->
+            current.copy(
+                showNumber = (target == guess),
+                guessOutcomeEvent = when {
+                    target > guess -> RandomNumberHigher
+                    target < guess -> RandomNumberLower
+                    else           -> RandomNumberGuessed
+                }
+            )
         }
     }
 
