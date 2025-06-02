@@ -50,7 +50,6 @@ android {
 }
 
 dependencies {
-
     implementation(project(":feature_random_number"))
 
     implementation(libs.androidx.core.ktx)

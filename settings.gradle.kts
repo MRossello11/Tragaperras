@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "Tragaperras"
 include(":app")
 include(":feature_random_number")
+include(":feature_credit")
