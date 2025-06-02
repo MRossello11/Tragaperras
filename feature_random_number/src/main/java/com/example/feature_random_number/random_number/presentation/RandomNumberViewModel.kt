@@ -1,9 +1,9 @@
-package com.example.tragaperras.random_number.presentation
+package com.example.feature_random_number.random_number.presentation
 
 import androidx.lifecycle.ViewModel
-import com.example.tragaperras.random_number.presentation.GuessOutcomeEvent.RandomNumberGuessed
-import com.example.tragaperras.random_number.presentation.GuessOutcomeEvent.RandomNumberHigher
-import com.example.tragaperras.random_number.presentation.GuessOutcomeEvent.RandomNumberLower
+import com.example.feature_random_number.random_number.presentation.GuessOutcomeEvent.RandomNumberGuessed
+import com.example.feature_random_number.random_number.presentation.GuessOutcomeEvent.RandomNumberHigher
+import com.example.feature_random_number.random_number.presentation.GuessOutcomeEvent.RandomNumberLower
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

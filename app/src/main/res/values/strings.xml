@@ -1,9 +1,5 @@
 <resources>
     <string name="app_name">Tragaperras</string>
 
-    <string name="random_number_higher">The random number is higher</string>
-    <string name="random_number_lower">The random number is lower</string>
-    <string name="random_number_guessed">Congratulations, you guessed the number!</string>
-    <string name="send">Send</string>
-    <string name="reset">Reset</string>
+
 </resources>

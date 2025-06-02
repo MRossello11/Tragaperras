@@ -1,4 +1,4 @@
-package com.example.tragaperras.random_number.presentation
+package com.example.feature_random_number.random_number.presentation
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
@@ -23,10 +23,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.tragaperras.R
-import com.example.tragaperras.random_number.presentation.GuessOutcomeEvent.RandomNumberGuessed
-import com.example.tragaperras.random_number.presentation.GuessOutcomeEvent.RandomNumberHigher
-import com.example.tragaperras.random_number.presentation.GuessOutcomeEvent.RandomNumberLower
+import com.example.feature_random_number.R
+import com.example.feature_random_number.random_number.presentation.GuessOutcomeEvent.RandomNumberGuessed
+import com.example.feature_random_number.random_number.presentation.GuessOutcomeEvent.RandomNumberHigher
+import com.example.feature_random_number.random_number.presentation.GuessOutcomeEvent.RandomNumberLower
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable

@@ -1,4 +1,4 @@
-package com.example.tragaperras.random_number.presentation
+package com.example.feature_random_number.random_number.presentation
 
 data class RandomNumberState(
     val randomNumber: Int? = null,
