@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Tragaperras"
 include(":app")
- 
+include(":feature_random_number")
