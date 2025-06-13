@@ -1,10 +1,11 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.ksp)
 }
 
 android {
-    namespace = "com.example.feature_credit"
+    namespace = "slot.machine.database"
     compileSdk = 35
 
     defaultConfig {
@@ -41,5 +42,11 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation(project(":database"))
+    // room
+    implementation(libs.room.runtime)
+    ksp(libs.room.compiler)
+
+    // di
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
 }
