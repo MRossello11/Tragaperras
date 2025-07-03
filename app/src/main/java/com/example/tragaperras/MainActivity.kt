@@ -11,8 +11,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import com.example.feature_random_number.random_number.presentation.RandomNumberScreen
 import com.example.feature_random_number.random_number.presentation.RandomNumberViewModel
-import com.example.tragaperras.core.presentation.Topbar
-import com.example.tragaperras.core.presentation.TopbarState
+import com.example.core.presentation.Topbar
+import com.example.core.presentation.TopbarState
 import com.example.tragaperras.ui.theme.TragaperrasTheme
 
 class MainActivity : ComponentActivity() {

@@ -1,4 +1,4 @@
-package com.example.tragaperras.core.presentation
+package com.example.core.presentation
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
