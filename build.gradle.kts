@@ -1,7 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     dependencies {
-        classpath("com.google.dagger:hilt-android-gradle-plugin:2.40.5")
+        classpath("com.google.dagger:hilt-android-gradle-plugin:2.56.2")
     }
 }
 plugins {
@@ -10,4 +10,5 @@ plugins {
     alias(libs.plugins.android.library) apply false
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.dagger.hilt) apply false
+    alias(libs.plugins.compose.compiler) apply false
 }
