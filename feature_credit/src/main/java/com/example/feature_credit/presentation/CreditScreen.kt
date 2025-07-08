@@ -16,14 +16,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun AddCreditScreen() {
-
-    val creditViewModel = hiltViewModel<CreditViewModel>()
+fun AddCreditScreen(
+    creditViewModel: CreditViewModel
+) {
     val uiState by creditViewModel.uiState.collectAsStateWithLifecycle()
 
     val creditOptions = listOf(1, 5, 10, 20, 50, 100)
