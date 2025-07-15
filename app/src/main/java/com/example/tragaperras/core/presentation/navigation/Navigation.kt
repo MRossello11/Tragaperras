@@ -1,7 +1,9 @@
 package com.example.tragaperras.core.presentation.navigation
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarDefaults
@@ -72,10 +74,17 @@ fun Navigation(
                     )
                 }
             }
+        },
+        content = { paddingValues ->
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+            ) {
+                AppNavHost(navController, startDestination)
+            }
         }
-    ) { contentPadding ->
-        AppNavHost(navController, startDestination)
-    }
+    )
 }
 
 @Composable
