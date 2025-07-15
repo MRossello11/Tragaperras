@@ -13,9 +13,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -26,6 +30,17 @@ fun AddCreditScreen(
     val uiState by creditViewModel.uiState.collectAsStateWithLifecycle()
 
     val creditOptions = listOf(1, 5, 10, 20, 50, 100)
+
+    val lifecycleState by LocalLifecycleOwner.current.lifecycle.currentStateFlow.collectAsState()
+
+    LaunchedEffect(lifecycleState) {
+        when (lifecycleState) {
+            Lifecycle.State.RESUMED -> {
+                creditViewModel.retrieveCredit()
+            }
+            else -> { /* other lifecycle states are not used */ }
+        }
+    }
 
     Column(
         modifier = Modifier

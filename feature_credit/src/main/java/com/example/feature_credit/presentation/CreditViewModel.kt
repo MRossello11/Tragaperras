@@ -2,6 +2,7 @@ package com.example.feature_credit.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.feature_credit.domain.GetCreditUseCase
 import com.example.feature_credit.domain.UpdateCreditUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -14,11 +15,20 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CreditViewModel @Inject constructor(
-    private val updateCreditUseCase: UpdateCreditUseCase
+    private val updateCreditUseCase: UpdateCreditUseCase,
+    private val getCreditUseCase: GetCreditUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(CreditState())
     val uiState: StateFlow<CreditState> = _uiState.asStateFlow()
+
+    fun retrieveCredit() = viewModelScope.launch(Dispatchers.IO) {
+        _uiState.update { currentState ->
+            currentState.copy(
+                currentCredit = getCreditUseCase().amount
+            )
+        }
+    }
 
     fun onUpdateAddedCredit(amount: Int) {
         _uiState.update { currentState ->

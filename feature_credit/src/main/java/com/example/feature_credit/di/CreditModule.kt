@@ -1,6 +1,7 @@
 package com.example.feature_credit.di
 
 import com.example.feature_credit.data.CreditRepositoryImpl
+import com.example.feature_credit.domain.GetCreditUseCase
 import com.example.feature_credit.domain.UpdateCreditUseCase
 import com.example.feature_credit.domain.repository.CreditRepository
 import dagger.Module
@@ -28,6 +29,16 @@ object CreditModule {
         creditRepository: CreditRepository
     ): UpdateCreditUseCase {
         return UpdateCreditUseCase(
+            creditRepository
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetCreditUseCase(
+        creditRepository: CreditRepository
+    ): GetCreditUseCase {
+        return GetCreditUseCase(
             creditRepository
         )
     }
