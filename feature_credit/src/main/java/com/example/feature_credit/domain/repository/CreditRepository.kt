@@ -4,5 +4,5 @@ import slot.machine.database.model.Credit
 
 interface CreditRepository {
     fun getCredit(): Credit
-    suspend fun changeCredit(newCredit: Credit)
+    suspend fun changeCredit(change: Int)
 }

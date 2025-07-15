@@ -11,7 +11,7 @@ class CreditRepositoryImpl(
         return creditDao.getCredit()
     }
 
-    override suspend fun changeCredit(newCredit: Credit) {
-        creditDao.updateCredit(newCredit)
+    override suspend fun changeCredit(change: Int) {
+        creditDao.changeCredit(change)
     }
 }
