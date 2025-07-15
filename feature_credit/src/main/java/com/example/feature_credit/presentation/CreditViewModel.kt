@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.feature_credit.domain.UpdateCreditUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -24,7 +23,7 @@ class CreditViewModel @Inject constructor(
     fun onUpdateAddedCredit(amount: Int) {
         _uiState.update { currentState ->
             currentState.copy(
-                addedCredit = amount
+                addedCredit = currentState.addedCredit + amount
             )
         }
     }
@@ -40,6 +39,10 @@ class CreditViewModel @Inject constructor(
     }
 
     fun onReset() {
-        onUpdateAddedCredit(0)
+        _uiState.update { currentState ->
+            currentState.copy(
+                addedCredit = 0
+            )
+        }
     }
 }
